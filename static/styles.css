@@ -1,0 +1,86 @@
+/*
+.indent {
+    position: absolute;
+    margin-left: 100px;
+    min-height: 40px;
+}
+*/
+#title {
+    font-size: 32px;
+}
+
+.dxitem {
+    width: 400px;
+}
+
+.planitem {
+    width: 983px;
+}
+
+textarea {
+    width: 1000px;
+}
+
+.section {
+    font-size: 24px;
+}
+
+.hpisection{
+    font-size: 18px;
+}
+
+.description{
+    color: blue;
+}
+
+#pi{
+    background-color: #ffebea;
+}
+
+#rfr{
+    background-color: #fff8eb;
+}
+
+#hpi{
+    background-color: #ffffeb;
+}
+
+#pph{
+    background-color: #e2ffe2;
+}
+
+#pmh{
+    background-color: #ebebff;
+}
+
+#meds{
+    background-color: #f4e4ff;
+}
+
+#allergies{
+    background-color: #fceafc;
+}
+
+#suh{
+    background-color: #ffebea;
+}
+
+#fph{
+    background-color: #fff8eb;
+}
+
+#mse{
+    background-color: #ffffeb;
+}
+
+#dx{
+    background-color: #e2ffe2;
+}
+
+#assessment{
+    background-color: #ebebff;
+}
+
+#plan{
+    background-color: #f4e4ff;
+}

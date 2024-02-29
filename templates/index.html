@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="/static/styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+        <title>notedraft</title>
+    </head>
+    <body>
+        <form action="/" method="post" onsubmit="return checkForm()">
+            <div id="title">notedraft</div>
+            <div id="pi">
+                <div class="section">Patient Identification</div>
+                <input class="indent" name="name" id="name" placeholder="name" type="text" required>
+                <br>
+                <input class="indent" name="age" id="age" placeholder="age" pattern="^[0-9]*$" type="text">
+                <br>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">female</label>
+                <input type="radio" id="non-binary" name="gender" value="non-binary">
+                <label for="non-binary">non-binary</label>
+                <br>
+                <input name="municipality" placeholder="municipality" type="text">
+                <br>
+                <input type="radio" id="employed" name="employedornot" value="employed">
+                <label for="employed">employed</label>
+                <input type="radio" id="unemployed" name="employedornot" value="unemployed">
+                <label for="unemployed">unemployed</label>
+                <br>
+                <input name="incomesource" placeholder="job / source of income" type="text">
+                <br>
+                <input name="starttime" placeholder="start time" type="text">
+                <br>
+                <input name="endtime" placeholder="end time" type="text">
+            </div>
+
+            <div id="rfr">
+                <div class="section">Reason for Referral</div>
+                <input name="reasonforreferral" id = "reasonforreferral" placeholder="reason for referral" type="text">
+            </div>
+
+            <div id="hpi">
+                <div class="section">History of Present Illness</div>
+
+                <textarea id="hpitext1" name="hpitext1" rows="3" cols="50" placeholder="free text"></textarea>
+
+                <div class="hpisection">Depression</div>
+                <div id="depression">
+                    <div class="description">
+                        Current mood:
+                    </div>
+                    <input type="radio" id="deplow" name="dep" value="low">
+                    <label for="deplow">low</label>
+                    <input type="radio" id="depoth" name="dep" value="other">
+                    <label for="dep">other: </label>
+                    <input name="depdes" id="depdes" placeholder="description" type="text">
+                    <br>
+                    <input name="depdur" placeholder="duration" type="text">
+                    <div class="description">
+                        Anhedonia:
+                    </div>
+                    <input type="radio" id="anhedoniaabs" name="anhedonia" value="present">
+                    <label for="anhedoniaabs">absent</label>
+                    <input type="radio" id="anhedoniapre" name="anhedonia" value="absent">
+                    <label for="anhedoniapre">present</label>
+                    <div class="description">
+                        Sleep:
+                    </div>
+                    <input class = "indent" type="radio" id="sleepinc" name="sleep" value="increased">
+                    <label for="sleepinc">increased</label>
+                    <input type="radio" id="sleepdec" name="sleep" value="decreased">
+                    <label for="sleepdec">decreased</label>
+                    <input type="radio" id="sleepnor" name="sleep" value="normal">
+                    <label for="sleepnor">normal</label>
+                    <input type="radio" id="sleepoth" name="sleep" value="other">
+                    <label for="sleepoth">other: </label>
+                    <input name="sleepdes" placeholder="description" type="text">
+                    <br>
+                    <input name="sleepdur" placeholder="average hours of sleep" pattern="^[0-9]*$" type="text">
+                    <div class="description">
+                        Guilt/worthlessness:
+                    </div>
+                    <input type="radio" id="gwgui" name="gw" value="guilt">
+                    <label for="gwgui">guilt</label>
+                    <input type="radio" id="gwwor" name="gw" value="worthlessness">
+                    <label for="gwwor">worthlessness</label>
+                    <input type="radio" id="gwbot" name="gw" value="both">
+                    <label for="gwbot">both</label>
+                    <input type="radio" id="gwnei" name="gw" value="neither">
+                    <label for="gwnei">neither</label>
+                    <div class="description">
+                        Energy:
+                    </div>
+                    <input class = "indent" type="radio" id="energyinc" name="energy" value="increased">
+                    <label for="energyinc">increased</label>
+                    <input type="radio" id="energydec" name="energy" value="decreased">
+                    <label for="energydec">decreased</label>
+                    <input type="radio" id="energynor" name="energy" value="normal">
+                    <label for="energynor">normal</label>
+                    <input type="radio" id="energyoth" name="energy" value="other">
+                    <label for="energyoth">other: </label>
+                    <input name="energydes" placeholder="description" type="text">
+                    <div class="description">
+                        Concentration:
+                    </div>
+                    <input type="radio" id="concentrationdec" name="concentration" value="decreased">
+                    <label for="concentrationdec">decreased</label>
+                    <input type="radio" id="concentrationnor" name="concentration" value="normal">
+                    <label for="concentrationnor">normal</label>
+                    <input type="radio" id="concentrationoth" name="concentration" value="other">
+                    <label for="concentrationoth">other: </label>
+                    <input name="concentrationdes" placeholder="description" type="text">
+                    <div class="description">
+                        Appetite:
+                    </div>
+                    <input class = "indent" type="radio" id="appetiteinc" name="appetite" value="increased">
+                    <label for="appetiteinc">increased</label>
+                    <input type="radio" id="appetitedec" name="appetite" value="decreased">
+                    <label for="appetitedec">decreased</label>
+                    <input type="radio" id="appetitenor" name="appetite" value="normal">
+                    <label for="appetitenor">normal</label>
+                    <input type="radio" id="appetiteoth" name="appetite" value="other">
+                    <label for="appetiteoth">other: </label>
+                    <input name="appetitedes" placeholder="description" type="text">
+                    <div class="description">
+                        Psychomotor activity:
+                    </div>
+                    <input class = "indent" type="radio" id="psychomotorinc" name="psychomotor" value="increased">
+                    <label for="psychomotorinc">increased</label>
+                    <input type="radio" id="psychomotordec" name="psychomotor" value="decreased">
+                    <label for="psychomotordec">decreased</label>
+                    <input type="radio" id="psychomotornor" name="psychomotor" value="normal">
+                    <label for="psychomotornor">normal</label>
+                    <input type="radio" id="psychomotoroth" name="psychomotor" value="other">
+                    <label for="psychomotoroth">other: </label>
+                    <input name="psychomotordes" placeholder="description" type="text">
+                </div>
+
+                <div class="hpisection">Safety</div>
+                <div id="safety">
+                    <div class="description">
+                        Suicidal ideation:
+                    </div>
+                    <input class = "indent" type="radio" id="siden" name="si" value="denied">
+                    <label for="siden">denied</label>
+                    <input type="radio" id="sipas" name="si" value="passive">
+                    <label for="sipas">passive</label>
+                    <input type="radio" id="siact" name="si" value="active">
+                    <label for="siact">active, with </label>
+                    <input name="sides" id="sides" placeholder="description" type="text">
+                    <div class="description">
+                        Suicide attempts:
+                    </div>
+                    <input class = "indent" type="radio" id="saabs" name="sa" value="absent">
+                    <label for="saabs">absent</label>
+                    <input type="radio" id="sapre" name="sa" value="present">
+                    <label for="sapre">present, with</label>
+                    <input name="sanum" placeholder="number" pattern="^[0-9]*$" type="text">
+                    involving
+                    <input name="sades" placeholder="description" type="text">
+                    <div class="description">
+                        Non-suicidal self-injury:
+                    </div>
+                    <input class = "indent" type="radio" id="nssiden" name="nssi" value="denied">
+                    <label for="nssiden">denied</label>
+                    <input type="radio" id="nssipas" name="nssi" value="passive">
+                    <label for="nssipas">thoughts only</label>
+                    <input type="radio" id="nssieng" name="nssi" value="engaged">
+                    <label for="nssieng">engaged, by </label>
+                    <input name="nssides" placeholder="description" type="text">
+                    <div class="description">
+                        Violent ideation:
+                    </div>
+                    <input class = "indent" type="radio" id="viden" name="vi" value="denied">
+                    <label for="viden">denied</label>
+                    <input type="radio" id="vipas" name="vi" value="passive">
+                    <label for="vipas">passive, with </label>
+                    <input name="vides1" id="vides1" placeholder="description" type="text">
+                    <input type="radio" id="viact" name="vi" value="active">
+                    <label for="viact">active, with </label>
+                    <input name="vides2" id="vides2" placeholder="description" type="text">
+                </div>
+
+                <div class="hpisection">Mania/hypomania</div>
+                <div id="mania">
+                    <div class="description">
+                        History:
+                    </div>
+                    <input class = "indent" type="radio" id="maniahistoryabs" name="maniahistory" value="absent">
+                    <label for="maniahistoryabs">absent</label>
+                    <input type="radio" id="maniapre" name="maniahistory" value="present">
+                    <label for="maniahistorypre">present: </label>
+                    <input name="maniahistorydes" placeholder="description" type="text">
+                    <div class="description">
+                        Current mood:
+                    </div>
+                    <input type="radio" id="maniaele" name="mania" value="elevated">
+                    <label for="maniaele">elevated</label>
+                    <input type="radio" id="maniairr" name="mania" value="irritable">
+                    <label for="maniairr">irritable</label>
+                    <input type="radio" id="maniaoth" name="mania" value="other">
+                    <label for="mania">other: </label>
+                    <input name="maniades" id="maniades" placeholder="description" type="text">
+                    <br>
+                    <input name="maniadur" placeholder="duration" type="text">
+                    <div class="description">
+                        Distractibility:
+                    </div>
+                    <input type="radio" id="distractibilityabs" name="distractibility" value="absent">
+                    <label for="distractibilityabs">absent</label>
+                    <input type="radio" id="distractibilitypre" name="distractibility" value="present">
+                    <label for="distractibilitypre">present</label>
+                    <div class="description">
+                        Impulsivity:
+                    </div>
+                    <input type="radio" id="impulsivityabs" name="impulsivity" value="absent">
+                    <label for="impulsivityabs">absent</label>
+                    <input type="radio" id="impulsivitypre" name="impulsivity" value="present">
+                    <label for="impulsivitypre">present</label>
+                    <div class="description">
+                        Grandiosity:
+                    </div>
+                    <input type="radio" id="grandiosityabs" name="grandiosity" value="absent">
+                    <label for="grandiosityabs">absent</label>
+                    <input type="radio" id="grandiositypre" name="grandiosity" value="present">
+                    <label for="grandiositypre">present</label>
+                    <div class="description">
+                        Racing thoughts:
+                    </div>
+                    <input type="radio" id="racingabs" name="racing" value="absent">
+                    <label for="racingabs">absent</label>
+                    <input type="radio" id="racingpre" name="racing" value="present">
+                    <label for="racingpre">present</label>
+                    <div class="description">
+                        Activity:
+                    </div>
+                    <input type="radio" id="activitygoa" name="activity" value="goal-directed">
+                    <label for="activitygoa">goal-directed</label>
+                    <input type="radio" id="activityagi" name="activity" value="agitation">
+                    <label for="activityagi">psychomotor agitation</label>
+                    <input type="radio" id="activitybot" name="activity" value="both">
+                    <label for="activitybot">both</label>
+                    <input type="radio" id="activitynei" name="activity" value="neither">
+                    <label for="activitynei">neither</label>
+                    <div class="description">
+                        Need for sleep:
+                    </div>
+                    <input type="radio" id="needforsleepdec" name="needforsleep" value="decreased">
+                    <label for="needforsleepdec">decreased</label>
+                    <input type="radio" id="needforsleepnor" name="needforsleep" value="normal">
+                    <label for="needforsleepnor">normal</label>
+                    <input type="radio" id="needforsleepoth" name="needforsleep" value="other">
+                    <label for="needforsleepoth">other: </label>
+                    <input name="needforsleepdes" placeholder="description" type="text">
+                    <br>
+                    <input name="needforsleepamount" placeholder="hours of sleep" pattern="^[0-9]*$" type="text">
+                    <div class="description">
+                        Increased talkativeness:
+                    </div>
+                    <input type="radio" id="talkabs" name="talk" value="absent">
+                    <label for="talkabs">absent</label>
+                    <input type="radio" id="talkpre" name="talk" value="present">
+                    <label for="talkpre">present</label>
+                    <br>
+                </div>
+
+                <div class="hpisection">Anxiety</div>
+                <div id="anxiety">
+                    <div class="description">
+                        Generalized anxiety:
+                    </div>
+                    <input class = "indent" type="radio" id="gaabs" name="ga" value="absent">
+                    <label for="gaabs">absent</label>
+                    <input type="radio" id="gapre" name="ga" value="present">
+                    <label for="gapre">present, for </label>
+                    <input name="gadur" placeholder="duration" type="text">
+                    <div class="description">
+                        Restlessness:
+                    </div>
+                    <input type="radio" id="restlessnessabs" name="restlessness" value="absent">
+                    <label for="restlessnessabs">absent</label>
+                    <input type="radio" id="restlessnesspre" name="restlessness" value="present">
+                    <label for="restlessnesspre">present</label>
+                    <div class="description">
+                        Easy fatiguability:
+                    </div>
+                    <input type="radio" id="fatiguabilityabs" name="fatiguability" value="absent">
+                    <label for="fatiguabilityabs">absent</label>
+                    <input type="radio" id="fatiguabilitypre" name="fatiguability" value="present">
+                    <label for="fatiguabilitypre">present</label>
+                    <div class="description">
+                        Difficulty concentrating:
+                    </div>
+                    <input type="radio" id="dcabs" name="dc" value="absent">
+                    <label for="dcabs">absent</label>
+                    <input type="radio" id="dcpre" name="dc" value="present">
+                    <label for="dcpre">present</label>
+                    <div class="description">
+                        Irritability:
+                    </div>
+                    <input type="radio" id="anxirrabs" name="anxirr" value="absent">
+                    <label for="anxirrabs">absent</label>
+                    <input type="radio" id="anxirrpre" name="anxirr" value="present">
+                    <label for="anxirrpre">present</label>
+                    <div class="description">
+                        Muscle tension:
+                    </div>
+                    <input type="radio" id="mtabs" name="mt" value="absent">
+                    <label for="mtabs">absent</label>
+                    <input type="radio" id="mtpre" name="mt" value="present">
+                    <label for="mtpre">present</label>
+                    <div class="description">
+                        Sleep disturbance:
+                    </div>
+                    <input type="radio" id="sdabs" name="sd" value="absent">
+                    <label for="sdabs">absent</label>
+                    <input type="radio" id="sdpre" name="sd" value="present">
+                    <label for="sdpre">present</label>
+                </div>
+
+                <div class="hpisection">Psychosis</div>
+                <div id="psychosis">
+                    <div class="description">
+                        Auditory hallucinations:
+                    </div>
+                    <input class = "indent" type="radio" id="ahabs" name="ah" value="absent">
+                    <label for="ahabs">absent</label>
+                    <input type="radio" id="ahpre" name="ah" value="present">
+                    <label for="ahpre">present, described as </label>
+                    <input name="ahdes" placeholder="description" type="text">
+                    <div class="description">
+                        Visual hallucinations:
+                    </div>
+                    <input class = "indent" type="radio" id="vhabs" name="vh" value="absent">
+                    <label for="vhabs">absent</label>
+                    <input type="radio" id="vhpre" name="vh" value="present">
+                    <label for="vhpre">present, described as </label>
+                    <input name="vhdes" placeholder="description" type="text">
+                    <div class="description">
+                        Delusions:
+                    </div>
+                    <input class = "indent" type="radio" id="delabs" name="del" value="absent">
+                    <label for="delabs">absent</label>
+                    <input type="radio" id="delpre" name="del" value="present">
+                    <label for="delpre">present, including delusions of </label>
+                    <input name="deldes" placeholder="description" type="text">
+                    <div class="description">
+                        Screened negative for delusions of:
+                    </div>
+                    <input type="checkbox" id="delscreenper" name="delscreenper" value="persection">
+                    <label for="delscreenper">persecution</label>
+                    <br>
+                    <input type="checkbox" id="delscreenref" name="delscreenref" value="reference">
+                    <label for="delscreenref">reference</label>
+                    <br>
+                    <input type="checkbox" id="delscreeniwb" name="delscreeniwb" value="thought insertion/withdrawal/broadcasting">
+                    <label for="delscreeniwb">thought insertion/withdrawal/broadcasting</label>
+                    <br>
+                    <input type="checkbox" id="delscreenjea" name="delscreenjea" value="jealousy">
+                    <label for="delscreenjea">jealousy</label>
+                    <br>
+                    <input type="checkbox" id="delscreengra" name="delscreengra" value="grandeur">
+                    <label for="delscreengra">grandeur</label>
+                    <br>
+                </div>
+
+                <textarea id="hpitext2" name="hpitext2" rows="3" cols="50" placeholder="free text"></textarea>
+            </div>
+
+            <div id="pph">
+                <div class="section">Past Psychiatric History</div>
+                <textarea id="pphtext" name="pphtext" rows="3" cols="50" placeholder="free text"></textarea>
+            </div>
+
+            <div id="pmh">
+                <div class="section">Past Medical History</div>
+                <input class = "indent" type="radio" id="pmhabs" name="pmh" value="absent">
+                <label for="pmhabs">none</label>
+                <input type="radio" id="pmhpre" name="pmh" value="present">
+                <label for="pmpre">present</label>
+                <br>
+
+                <div id="pmhdisplay" style="display:none">
+                    <label for="pmh1">1. </label>
+                    <input name="pmh1" id="pmh1" placeholder="condition" type="text">
+                    <br>
+                    <label for="pmh2">2. </label>
+                    <input name="pmh2" id="pmh2" placeholder="condition" type="text">
+                    <br>
+                    <label for="pmh3">3. </label>
+                    <input name="pmh3" id="pmh3" placeholder="condition" type="text">
+                    <br>
+                    <label for="pmh4">4. </label>
+                    <input name="pmh4" id="pmh4" placeholder="condition" type="text">
+                    <br>
+                    <label for="pmh5">5. </label>
+                    <input name="pmh5" id="pmh5" placeholder="condition" type="text">
+                    <br>
+                    <textarea id="pmhtext" name="pmhtext" rows="3" cols="50" placeholder="free text"></textarea>
+                </div>
+            </div>
+
+            <div id="meds">
+                <div class="section">Medications</div>
+                <input class = "indent" type="radio" id="medabs" name="med" value="absent">
+                <label for="medabs">none</label>
+                <input type="radio" id="medpre" name="med" value="present">
+                <label for="pmpre">present</label>
+
+                <div id="meddisplay" style="display:none">
+                    <label for="med1">1. </label>
+                    <input name="med1" id="med1" placeholder="medication" type="text">
+                    <br>
+                    <label for="med2">2. </label>
+                    <input name="med2" id="med2" placeholder="medication" type="text">
+                    <br>
+                    <label for="med3">3. </label>
+                    <input name="med3" id="med3" placeholder="medication" type="text">
+                    <br>
+                    <label for="med4">4. </label>
+                    <input name="med4" id="med4" placeholder="medication" type="text">
+                    <br>
+                    <label for="med5">5. </label>
+                    <input name="med5" id="med5" placeholder="medication" type="text">
+                    <br>
+                    <textarea id="medtext" name="medtext" rows="3" cols="50" placeholder="free text"></textarea>
+                </div>
+            </div>
+
+            <div id="allergies">
+                <div class="section">Allergies</div>
+
+                <input class = "indent" type="radio" id="allabs" name="all" value="absent">
+                <label for="allabs">absent</label>
+                <input type="radio" id="allpre" name="all" value="present">
+                <label for="allpre">present: </label>
+                <input name="alldes" placeholder="description" type="text">
+            </div>
+
+            <div id="suh">
+                <div class="section">Substance Use History</div>
+                <div class="description">
+                    Smoking:
+                </div>
+                <input class = "indent" type="radio" id="smokesabs" name="smokes" value="absent">
+                <label for="smokeslabs">no</label>
+                <input type="radio" id="smokespre" name="smokes" value="present">
+                <label for="smokespre">yes, smokes </label>
+                <input name="smokesdes" placeholder="description" type="text">
+                <div class="description">
+                    Drinking:
+                </div>
+                <input class = "indent" type="radio" id="drinksabs" name="drinks" value="absent">
+                <label for="drinkslabs">no</label>
+                <input type="radio" id="drinkspre" name="drinks" value="present">
+                <label for="drinkspre">yes, drinks </label>
+                <input name="drinksdes" placeholder="description" type="text">
+                <div class="description">
+                    Recreational drug use:
+                </div>
+                <input class = "indent" type="radio" id="drugsabs" name="drugs" value="absent">
+                <label for="drugslabs">no</label>
+                <input type="radio" id="drugspre" name="drugs" value="present">
+                <label for="drugspre">yes, uses </label>
+                <input name="drugsdes" placeholder="description" type="text">
+                <br>
+                <textarea id="suhtext" name="suhtext" rows="3" cols="50" placeholder="free text"></textarea>
+            </div>
+
+            <div id="fph">
+                <div class="section">Family Psychiatric History</div>
+
+                <input class = "indent" type="radio" id="fphabs" name="fph" value="absent">
+                <label for="fphlabs">absent</label>
+                <input type="radio" id="fphpre" name="fph" value="present">
+                <label for="fphpre">present: </label>
+                <input name="fphdes" placeholder="description" type="text">
+            </div>
+
+            <div id="mse">
+                <div class="section">Mental Status Examination</div>
+                <div class="description">
+                    Appearance:
+                </div>
+                <input class = "indent" type="radio" id="mseanor" name="msea" value="normal">
+                <label for="mseanor">normal</label>
+                <input type="radio" id="mseaoth" name="msea" value="other">
+                <label for="mseaoth">other: </label>
+                <input name="mseades" placeholder="full sentence" type="text">
+                <div class="description">
+                    Behavior:
+                </div>
+                <input class = "indent" type="radio" id="msebnor" name="mseb" value="normal">
+                <label for="msebnor">normal</label>
+                <input type="radio" id="mseboth" name="mseb" value="other">
+                <label for="mseboth">other: </label>
+                <input name="msebdes" placeholder="full sentence" type="text">
+                <div class="description">
+                    Cooperativeness:
+                </div>
+                <input class = "indent" type="radio" id="mseccoo" name="msec" value="cooperative">
+                <label for="mseccoo">cooperative</label>
+                <input class = "indent" type="radio" id="msecgua" name="msec" value="guarded">
+                <label for="msecgua">guarded</label>
+                <input type="radio" id="msecoth" name="msec" value="other">
+                <label for="msecoth">other: </label>
+                <input name="msecdes" placeholder="full sentence" type="text">
+                <div class="description">
+                    Mood:
+                </div>
+                <input name="msem" id = "msem" placeholder="description" type="text">
+                <div class="description">
+                    Affect quality:
+                </div>
+                <input class = "indent" type="radio" id="mseaqeut" name="mseaq" value="euthymic">
+                <label for="mseaqeut">euthymic</label>
+                <input class = "indent" type="radio" id="mseaqdys" name="mseaq" value="dysthymic">
+                <label for="mseaqdys">dysthymic</label>
+                <input type="radio" id="mseaqoth" name="mseaq" value="other">
+                <label for="mseaqoth">other: </label>
+                <input name="mseaqdes" placeholder="description" type="text">
+                <div class="description">
+                    Affect range:
+                </div>
+                <input class = "indent" type="radio" id="msearfla" name="msear" value="flat">
+                <label for="msearfla">flat</label>
+                <input class = "indent" type="radio" id="msearblu" name="msear" value="blunted">
+                <label for="msearblu">blunted</label>
+                <input class = "indent" type="radio" id="msearcon" name="msear" value="constricted">
+                <label for="msearcon">constricted</label>
+                <input class = "indent" type="radio" id="msearrea" name="msear" value="reactive">
+                <label for="msearrea">reactive</label>
+                <input class = "indent" type="radio" id="msearlab" name="msear" value="labile">
+                <label for="msearlab">labile</label>
+                <input type="radio" id="msearoth" name="msear" value="other">
+                <label for="msearoth">other: </label>
+                <input name="mseardes" placeholder="description" type="text">
+                <div class="description">
+                    Speech:
+                </div>
+                <input class = "indent" type="radio" id="msesnor" name="mses" value="normal">
+                <label for="msesnor">normal</label>
+                <input type="radio" id="msesoth" name="mses" value="other">
+                <label for="msesoth">other: </label>
+                <input name="msesdes" placeholder="full sentence" type="text">
+                <div class="description">
+                    Thought form:
+                </div>
+                <input class = "indent" type="radio" id="msetfnor" name="msetf" value="normal">
+                <label for="msetfnor">normal</label>
+                <input type="radio" id="msetfoth" name="msetf" value="other">
+                <label for="msetfoth">other: </label>
+                <input name="msetfdes" placeholder="full sentence" type="text">
+                <div class="description">
+                    Thought content:
+                </div>
+                <input class = "indent" type="radio" id="msetcnor" name="msetc" value="normal">
+                <label for="msetcnor">normal</label>
+                <input type="radio" id="msetcoth" name="msetc" value="other">
+                <label for="msetcoth">included </label>
+                <input name="msetcdes" placeholder="description" type="text">
+                <div class="description">
+                    Perceptual abnormalities:
+                </div>
+                <input class = "indent" type="radio" id="msepabs" name="msep" value="absent">
+                <label for="msepabs">absent</label>
+                <input type="radio" id="mseppre" name="msep" value="present">
+                <label for="mseppre">other: </label>
+                <input name="msepdes" placeholder="full sentence" type="text">
+                <div class="description">
+                    Suicidality:
+                </div>
+                <input class = "indent" type="radio" id="msesiden" name="msesi" value="denied">
+                <label for="msesiden">denied</label>
+                <input type="radio" id="msesipas" name="msesi" value="passive">
+                <label for="msesipas">passive</label>
+                <input type="radio" id="msesiact" name="msesi" value="active">
+                <label for="msesiact">active, with </label>
+                <input name="msesides" id="msesides" placeholder="description" type="text">
+                <div class="description">
+                    Violent ideation:
+                </div>
+                <input class = "indent" type="radio" id="mseviden" name="msevi" value="denied">
+                <label for="mseviden">denied</label>
+                <input type="radio" id="msevipas" name="msevi" value="passive">
+                <label for="msevipas">passive, with</label>
+                <input name="msevides" id="msevides1" placeholder="description" type="text">
+                <input type="radio" id="mseviact" name="msevi" value="active">
+                <label for="mseviact">active, with </label>
+                <input name="msevides" id="msevides2" placeholder="description" type="text">
+                <div class="description">
+                    Cognition:
+                </div>
+                <input class = "indent" type="radio" id="msecognor" name="msecog" value="normal">
+                <label for="msecognor">grossly intact</label>
+                <input type="radio" id="msecogoth" name="msecog" value="other">
+                <label for="msecogoth">other: </label>
+                <input name="msecogdes" placeholder="full sentence" type="text">
+                <div class="description">
+                    Insight:
+                </div>
+                <input class = "indent" type="radio" id="mseipoo" name="msei" value="poor">
+                <label for="mseipoo">poor</label>
+                <input class = "indent" type="radio" id="mseifai" name="msei" value="fair">
+                <label for="mseifai">fair</label>
+                <input class = "indent" type="radio" id="mseigoo" name="msei" value="good">
+                <label for="mseigoo">good</label>
+                <input type="radio" id="mseioth" name="msei" value="other">
+                <label for="mseioth">other: </label>
+                <input name="mseides" placeholder="description" type="text">
+                <div class="description">
+                    Judgment:
+                </div>
+                <input class = "indent" type="radio" id="msejpoo" name="msej" value="poor">
+                <label for="msejpoo">poor</label>
+                <input class = "indent" type="radio" id="msejfai" name="msej" value="fair">
+                <label for="msejfai">fair</label>
+                <input class = "indent" type="radio" id="msejgoo" name="msej" value="good">
+                <label for="msejgoo">good</label>
+                <input type="radio" id="msejoth" name="msej" value="other">
+                <label for="msejoth">other: </label>
+                <input name="msejdes" placeholder="description" type="text">
+            </div>
+
+            <div id="dx">
+                <div class="section">Diagnoses</div>
+
+                <label for="dx1">1. </label>
+                <input name="dx1" id="dx1" class="dxitem" placeholder="diagnosis" type="text">
+                <br>
+                <label for="dx2">2. </label>
+                <input name="dx2" id="dx2" class="dxitem" placeholder="diagnosis" type="text">
+                <br>
+                <label for="dx3">3. </label>
+                <input name="dx3" id="dx3" class="dxitem" placeholder="diagnosis" type="text">
+                <br>
+                <label for="dx4">4. </label>
+                <input name="dx4" id="dx4" class="dxitem" placeholder="diagnosis" type="text">
+                <br>
+                <label for="dx5">5. </label>
+                <input name="dx5" id="dx5" class="dxitem" placeholder="diagnosis" type="text">
+                <br>
+                <textarea id="dxtext" name="dxtext" rows="3" cols="50" placeholder="free text"></textarea>
+            </div>
+
+            <div id="assessment">
+                <div class="section">Assessment</div>
+                <textarea id="assesstext" name="assesstext" rows="3" cols="50" placeholder="free text"></textarea>
+            </div>
+
+            <div id="plan">
+                <div class="section">Plan</div>
+                <label for="plan1">1. </label>
+                <input name="plan1" id="plan1" class ="planitem" placeholder="plan item" type="text">
+                <br>
+                <label for="plan2">2. </label>
+                <input name="plan2" id="plan2" class ="planitem" placeholder="plan item" type="text">
+                <br>
+                <label for="plan3">3. </label>
+                <input name="plan3" id="plan3" class ="planitem" placeholder="plan item" type="text">
+                <br>
+                <label for="plan4">4. </label>
+                <input name="plan4" id="plan4" class ="planitem" placeholder="plan item" type="text">
+                <br>
+                <label for="plan5">5. </label>
+                <input name="plan5" id="plan5" class ="planitem" placeholder="plan item" type="text">
+                <br>
+                <textarea id="plantext" name="plantext" rows="3" cols="50" placeholder="free text"></textarea>
+                <br>
+                <button class="btn btn-primary" id="submitbtn" type="submit">submit</button>
+                <div id="issues"></div>
+            </div>
+
+        </form>
+
+        <script>
+            document.querySelector("#pmhpre").addEventListener("click", function() {
+                document.getElementById("pmhdisplay").style.display = "block";
+            });
+
+            document.querySelector("#pmhabs").addEventListener("click", function() {
+                document.getElementById("pmhdisplay").style.display = "none";
+            });
+
+            document.querySelector("#medpre").addEventListener("click", function() {
+                document.getElementById("meddisplay").style.display = "block";
+            });
+
+            document.querySelector("#medabs").addEventListener("click", function() {
+                document.getElementById("meddisplay").style.display = "none";
+            });
+
+            document.querySelector("#deplow").addEventListener("click", function() {
+                document.getElementById("msem").value = "low";
+            });
+
+            document.querySelector("#depdes").addEventListener("input", function() {
+                document.getElementById("msem").value = document.getElementById("depdes").value;
+            });
+
+            document.querySelector("#maniaele").addEventListener("click", function() {
+                document.getElementById("msem").value = "elevated";
+            });
+
+            document.querySelector("#maniairr").addEventListener("click", function() {
+                document.getElementById("msem").value = "irritable";
+            });
+
+            document.querySelector("#maniades").addEventListener("input", function() {
+                document.getElementById("msem").value = document.getElementById("maniades").value;
+            });
+
+            document.querySelector("#siden").addEventListener("click", function() {
+                document.getElementById("msesiden").checked = true;
+            });
+
+            document.querySelector("#sipas").addEventListener("click", function() {
+                document.getElementById("msesipas").checked = true;
+            });
+
+            document.querySelector("#siact").addEventListener("click", function() {
+                document.getElementById("msesiact").checked = true;
+            });
+
+            document.querySelector("#sides").addEventListener("input", function() {
+                document.getElementById("msesides").value = document.getElementById("sides").value;
+            });
+
+            document.querySelector("#viden").addEventListener("click", function() {
+                document.getElementById("mseviden").checked = true;
+            });
+
+            document.querySelector("#vipas").addEventListener("click", function() {
+                document.getElementById("msevipas").checked = true;
+            });
+
+            document.querySelector("#viact").addEventListener("click", function() {
+                document.getElementById("mseviact").checked = true;
+            });
+
+            document.querySelector("#vides1").addEventListener("input", function() {
+                document.getElementById("msevides1").value = document.getElementById("vides1").value;
+            });
+
+            document.querySelector("#vides2").addEventListener("input", function() {
+                document.getElementById("msevides2").value = document.getElementById("vides2").value;
+            });
+        </script>
+    </body>
+</html>
