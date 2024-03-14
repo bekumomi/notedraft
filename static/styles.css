@@ -69,18 +69,22 @@ textarea {
     background-color: #fff8eb;
 }
 
-#mse{
+#sh{
     background-color: #ffffeb;
 }
 
-#dx{
+#mse{
     background-color: #e2ffe2;
 }
 
-#assessment{
+#dx{
     background-color: #ebebff;
 }
 
-#plan{
+#assessment{
     background-color: #f4e4ff;
+}
+
+#plan{
+    background-color: #fceafc;
 }

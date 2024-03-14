@@ -742,6 +742,12 @@ def index():
             elif fph == "present" and fphdes:
                 note += "FAMILY PSYCHIATRIC HISTORY: " + fphdes + "\n\n"
 
+        shtext = request.form.get("shtext")
+        if shtext:
+            note += "SOCIAL HISTORY: "
+            note += shtext
+            note += "\n\n"
+
         note += "MENTAL STATUS EXAMINATION: "
 
         msea = request.form.get("msea")
